@@ -1,0 +1,110 @@
+OPS535 Lab 6 Check Lab Information
+Mon Jul 19 12:58:24 EDT 2021
+Basic System Info
+hostname:router
+
+SELinux status:Enforcing
+
+IP FORWARD:net.ipv4.ip_forward = 1
+
+End Basic System Info
+NET INTERFACES
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=dhcp
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=no
+NAME=ens192
+UUID=29b6e258-0ffd-4ee3-8f2d-2126105eee4f
+DEVICE=ens192
+ONBOOT=yes
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=none
+IPADDR=192.168.17.1
+PREFIX=24
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=ens224
+UUID=397fba7a-5e78-31f7-b91c-2dfd9ee3feda
+DEVICE=ens224
+ONBOOT=yes
+AUTOCONNECT_PRIORITY=-999
+ZONE=external
+
+Lab 6 Network Configuration
+IP ADDRESSES
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: ens192: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:50:56:00:02:25 brd ff:ff:ff:ff:ff:ff
+    inet 172.20.17.1/16 brd 172.20.255.255 scope global dynamic noprefixroute ens192
+       valid_lft 83515sec preferred_lft 83515sec
+    inet6 fe80::250:56ff:fe00:225/64 scope link 
+       valid_lft forever preferred_lft forever
+3: ens224: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:0c:29:bb:91:db brd ff:ff:ff:ff:ff:ff
+    inet 192.168.17.1/24 brd 192.168.17.255 scope global noprefixroute ens224
+       valid_lft forever preferred_lft forever
+    inet6 fe80::2bf7:b49a:36d1:e8ce/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+4: ens256: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 00:0c:29:bb:91:e5 brd ff:ff:ff:ff:ff:ff
+END IP ADDRESSES
+IP ROUTES
+default via 172.20.255.1 dev ens192 proto dhcp metric 102 
+172.20.0.0/16 dev ens192 proto kernel scope link src 172.20.17.1 metric 102 
+192.168.2.0/24 via 172.20.2.1 dev ens192 proto static metric 100 
+192.168.3.0/24 via 172.20.3.1 dev ens192 proto static metric 100 
+192.168.17.0/24 dev ens224 proto kernel scope link src 192.168.17.1 metric 101 
+END IP ROUTES
+
+Lab 6 Firewall configuration
+firewalld:active
+firewalld:enabled
+iptables:inactive
+iptables:
+FIREWALLD configuration
+external (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: ens224
+  sources: 
+  services: dns ssh
+  ports: 
+  protocols: 
+  masquerade: no
+  forward-ports: 
+  source-ports: 
+  icmp-blocks: 
+  rich rules: 
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: ens192
+  sources: 
+  services: cockpit dhcpv6-client ssh
+  ports: 
+  protocols: 
+  masquerade: no
+  forward-ports: 
+  source-ports: 
+  icmp-blocks: 
+  rich rules: 
+END FIREWALLD configuration
+UUID:340c51dc-89fd-42e3-9a74-da365fa7f126
+
+OPS535 Lab 6 End of Check List
+Mon Jul 19 12:58:25 EDT 2021
